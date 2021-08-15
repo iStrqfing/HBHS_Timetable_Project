@@ -13,7 +13,7 @@ const HomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
     <Text style={styles.title}>Menu</Text>
-    <View style={stylesHomeScreen.btnContainer}>
+    <View style={styles.btnContainer}>
       <View style={stylesHomeScreen.btnMenu}>
         <Button color="#e50000" title="Timetable" onPress={() => navigation.navigate('Timetable')}/>
       </View>

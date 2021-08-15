@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
       width: '80%',
       display: 'flex',
       marginLeft: 'auto',
-        marginRight: 'auto',
+      marginRight: 'auto',
     },
   
     title: {
@@ -27,6 +27,19 @@ const styles = StyleSheet.create({
         color: '#fff',
       },   
     
+      btnContainer: {
+        justifyContent: 'center',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: 15,
+        width: '50%',
+      },
+
+      btn: {
+        color: 'red',
+        width: 100,
+        textAlign: 'center',
+      },
   });
 
   const stylesSplashScreen = StyleSheet.create({
@@ -55,19 +68,19 @@ const styles = StyleSheet.create({
     btnMenu: {
         color: '#f194ff',
         marginBottom: 15,
-      },
-    
-      btnContainer: {
-        justifyContent: 'center',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        marginTop: 15,
-        width: '50%',
-      },
+      },        
   });
 
   const stylesTimetableScreen = StyleSheet.create({
-
+    txtSubject: {
+      color: 'black',
+      borderColor: 'grey',
+      borderWidth: 2,
+      borderRadius: 10,
+      backgroundColor: 'white',
+      marginBottom: 10,
+      height: 40,
+    }
     });
 
     const stylesDiaryScreen = StyleSheet.create({
