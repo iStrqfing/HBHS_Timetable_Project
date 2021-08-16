@@ -65,10 +65,20 @@ const styles = StyleSheet.create({
 
 
   const stylesHomeScreen = StyleSheet.create({
-    btnMenu: {
-        color: '#f194ff',
-        marginBottom: 15,
-      },        
+    headerContainer: { 
+      flexDirection: 'row', 
+      justifyContent: "center",   
+      alignItems: 'center', 
+      marginBottom: 40, 
+      marginTop: 60,
+  },
+
+    title: {
+      fontSize: 28,
+      fontWeight: 'bold',
+      color: '#fff',
+      marginLeft: 10,
+    },
   });
 
   const stylesTimetableScreen = StyleSheet.create({
@@ -91,4 +101,57 @@ const styles = StyleSheet.create({
 
     });
   
-  export {styles, stylesSplashScreen, stylesHomeScreen, stylesTimetableScreen, stylesDiaryScreen, stylesSubjectOverviewScreen};
+    const stylesDrawerNav = StyleSheet.create({
+      container: {
+        flex: 1,       
+      },  
+      
+      inner: {
+        
+      },
+
+      headerContainer: { 
+        flexDirection: 'row',    
+        alignItems: 'center', 
+        width: '80%', 
+        marginBottom: 20, 
+        marginTop: 60,
+    },
+
+      title: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        color: '#fff',
+        marginLeft: 10,
+      },
+      
+      iconIMG: {
+        width: 60,
+        height: 60,
+      },
+
+      navigationContainer: {
+        
+        alignItems: 'center',
+      },
+
+      btn: {
+        width: 210,
+        height: 40,
+        backgroundColor: 'white',
+        borderRadius: 5,
+        marginBottom: 10,   
+        justifyContent: "center",      
+      },
+
+      btnTxt: {
+        textAlign: 'left',
+        paddingLeft: 15,
+        color: 'rgb(12,12,12)',
+        fontSize: 17,   
+        
+      }
+    });
+  
+
+  export {styles, stylesSplashScreen, stylesHomeScreen, stylesTimetableScreen, stylesDiaryScreen, stylesSubjectOverviewScreen, stylesDrawerNav};
