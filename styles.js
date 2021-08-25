@@ -13,6 +13,14 @@ const styles = StyleSheet.create({
       padding: 8,
     },
   
+    content: {
+      justifyContent: 'center',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: 15,
+      width: '70%',
+    },
+
     headingContainer: {
       width: '80%',
       display: 'flex',
@@ -82,6 +90,12 @@ const styles = StyleSheet.create({
   });
 
   const stylesTimetableScreen = StyleSheet.create({
+    btnContainer: {
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    
     txtSubject: {
       color: 'black',
       borderColor: 'grey',
@@ -90,7 +104,28 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       marginBottom: 10,
       height: 40,
-    }
+      flex: 15,
+    },  
+
+    subjectsContainer: {
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'flex-start'
+    },
+
+    subjectTitle: {
+      color: "#fff",
+      fontSize: 18,
+    },
+
+    removeSubjectContainer: {
+      paddingLeft: 8,
+    },
+
+    btnRemoveSubject: {
+      color: '#fff',
+      textAlign: 'right',
+    },
     });
 
     const stylesDiaryScreen = StyleSheet.create({
@@ -148,8 +183,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         paddingLeft: 15,
         color: 'rgb(12,12,12)',
-        fontSize: 17,   
-        
+        fontSize: 17,       
       }
     });
   
