@@ -130,11 +130,15 @@ const styles = StyleSheet.create({
 
     periodList: {
       height: 50,
+      backgroundColor: 'white',
+      
+      
     },
 
     periodListItems: {
-      backgroundColor: '#fff',
+      backgroundColor: 'white',
       height: 50,
+      color: 'black',
     },
 
     btnAddSubject: {
@@ -180,8 +184,6 @@ const styles = StyleSheet.create({
     removeSubjectContainer: {
       paddingLeft: 8,
     },
-
-    
 
     btnRemoveSubject: {
       color: '#ff0000',

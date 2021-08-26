@@ -12,14 +12,17 @@ import {
 import {styles, stylesTimetableScreen} from '../styles';
 
 import { List, Title, Modal, Portal, Provider, DataTable } from 'react-native-paper';
-
-
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { white } from 'react-native-paper/lib/typescript/styles/colors';
 
 const TimetableScreen = ({navigation}) => {
   // Stores subjects and their information
   const [subjectInput, setSubjectInput] = useState('');
-  const [subjects, setSubjects] = useState([]);
+  const [subjects, setSubjects] = useState([
+    {subjectName: 'Maths', subjectPeriod: 1},
+    {subjectName: 'Science', subjectPeriod: 2},
+    {subjectName: 'English', subjectPeriod: 3},
+  ]);
   const AddSubject = () => {
     if (subjectInput === ""){ //if subjectInput is blank
       Alert.alert("Error:", "Subject can't be blank")
@@ -28,7 +31,9 @@ const TimetableScreen = ({navigation}) => {
         Alert.alert("Error:", "Please select a period")
       } else if (subjects.filter((subject) => subject.subjectPeriod === period).length === 0){ // Else if period is not a repeat
           Alert.alert(subjectInput, "Subject has been added");
-          setSubjects([...subjects, { subjectName: subjectInput, subjectPeriod: period }]),       
+          let tempSubjectsToSave = [...subjects, {subjectName: subjectInput, subjectPeriod: period}] // Save subject info temporarily
+          tempSubjectsToSave.sort((a, b) => (a.subjectPeriod > b.subjectPeriod) ? 1 : -1) // Sort temp subject info
+          setSubjects(tempSubjectsToSave) // Reorder the array in order of smallest period
           setSubjectInput("");
           setPeriod('Select Period');
         } else { // Else if period is a repeat
@@ -67,19 +72,19 @@ const TimetableScreen = ({navigation}) => {
                     <Title style={{color: 'black', marginBottom: 20,}}>Add Subjects:</Title>
                     <TextInput
                     style={stylesTimetableScreen.txtSubject}
-                    placeholder="Enter Subject..." 
+                    placeholder="Enter Subject..." placeholderTextColor="grey"
                     onChangeText={text => setSubjectInput(text)} 
                     defaultValue={subjectInput}/>
                     <View style={stylesTimetableScreen.periodListContainer}>
-                      <List.Accordion style={stylesTimetableScreen.periodList} expanded={expanded} onPress={() => setExpanded(!expanded)} title={period} id="1">
-                        <List.Item style={stylesTimetableScreen.periodListItems} key='1' onPress={() => selectPeriod('Period 1')} title="Period 1" />
-                        <List.Item style={stylesTimetableScreen.periodListItems} key='2' onPress={() => selectPeriod('Period 2')} title="Period 2" />
-                        <List.Item style={stylesTimetableScreen.periodListItems} key='3' onPress={() => selectPeriod('Period 3')} title="Period 3" />
-                        <List.Item style={stylesTimetableScreen.periodListItems} key='4' onPress={() => selectPeriod('Period 4')} title="Period 4" />
-                        <List.Item style={stylesTimetableScreen.periodListItems} key='5' onPress={() => selectPeriod('Period 5')} title="Period 5" />
-                        <List.Item style={stylesTimetableScreen.periodListItems} key='6' onPress={() => selectPeriod('Period 6')} title="Period 6" />
+                      <List.Accordion style={stylesTimetableScreen.periodList} titleStyle={{color: 'black', fontSize: 14,}} expanded={expanded} onPress={() => setExpanded(!expanded)} title={period} id="1">
+                        <List.Item style={stylesTimetableScreen.periodListItems} titleStyle={{color: 'black'}} key='1' onPress={() => selectPeriod('1')} title="Period 1" />
+                        <List.Item style={stylesTimetableScreen.periodListItems} titleStyle={{color: 'black'}} key='2' onPress={() => selectPeriod('2')} title="Period 2" />
+                        <List.Item style={stylesTimetableScreen.periodListItems} titleStyle={{color: 'black'}} key='3' onPress={() => selectPeriod('3')} title="Period 3" />
+                        <List.Item style={stylesTimetableScreen.periodListItems} titleStyle={{color: 'black'}} key='4' onPress={() => selectPeriod('4')} title="Period 4" />
+                        <List.Item style={stylesTimetableScreen.periodListItems} titleStyle={{color: 'black'}} key='5' onPress={() => selectPeriod('5')} title="Period 5" />
+                        <List.Item style={stylesTimetableScreen.periodListItems} titleStyle={{color: 'black'}} key='6' onPress={() => selectPeriod('6')} title="Period 6" />
                       </List.Accordion>
-                    </View>   
+                    </View>
                     <TouchableOpacity style={stylesTimetableScreen.btnAddSubject} onPress={() => AddSubject()}>
                       <Text style={stylesTimetableScreen.btnAddSubjectTxt}>Add Subject</Text>
                     </TouchableOpacity>
@@ -92,11 +97,22 @@ const TimetableScreen = ({navigation}) => {
             <View style={{backgroundColor: 'white'}}>
               <DataTable>
                 <DataTable.Header>
-                  <DataTable.Title ><Text style={stylesTimetableScreen.tableTitle}>Subject</Text></DataTable.Title>
-                  <DataTable.Title sortDirection='descending' style={stylesTimetableScreen.tableTitle} numeric><Text style={stylesTimetableScreen.tableTitle}>Period</Text></DataTable.Title>
-                  <DataTable.Title style={stylesTimetableScreen.tableTitle} numeric><Text style={stylesTimetableScreen.tableTitle}>Remove</Text></DataTable.Title>
+                  <DataTable.Title>
+                    <Text style={stylesTimetableScreen.tableTitle}>Subject
+                    </Text>
+                  </DataTable.Title>
+                  <DataTable.Title style={{color: 'black'}} sortDirection='descending' numeric>
+                    <Text style={stylesTimetableScreen.tableTitle}>
+                      Period
+                    </Text>
+                  </DataTable.Title>
+                  <DataTable.Title style={stylesTimetableScreen.tableTitle} numeric>
+                    <Text style={stylesTimetableScreen.tableTitle}>
+                      Remove
+                    </Text>
+                  </DataTable.Title>
                 </DataTable.Header>
-                {subjects.map((subjectItem, index) => { //Map all subjects into their own overview   
+                {subjects.map((subjectItem) => { //Map all subjects into their own overview   
                 const RemoveSubject = () => { // Function to delete subject          
                   Alert.alert(subjectItem.subjectName, "Are you sure you want to remove this subject", [
                     {
@@ -116,7 +132,7 @@ const TimetableScreen = ({navigation}) => {
                         </View>
                       </DataTable.Cell>
                       <DataTable.Cell numeric>
-                      {subjectItem.subjectPeriod}
+                        <Text style={{color: 'black'}}>{subjectItem.subjectPeriod}</Text>
                       </DataTable.Cell>
                       <DataTable.Cell numeric>
                         <TouchableOpacity style={stylesTimetableScreen.removeSubjectContainer} onPress={() => RemoveSubject()}>
@@ -125,11 +141,11 @@ const TimetableScreen = ({navigation}) => {
                       </DataTable.Cell>
                   </DataTable.Row>                    
                   );
-                })}              
+                })}
               </DataTable>
             </View>
           </View>
-          <TouchableOpacity style={stylesTimetableScreen.btnAddSubject} onPress={() => showModal()}>
+          <TouchableOpacity style={{...stylesTimetableScreen.btnAddSubject, borderWidth: 0, borderTopWidth: 1}} onPress={() => showModal()}>
             <Text style={stylesTimetableScreen.btnAddSubjectTxt}>Add Subjects</Text>
           </TouchableOpacity>     
         </View>
