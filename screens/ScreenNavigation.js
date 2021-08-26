@@ -14,7 +14,7 @@ import { createDrawerNavigator, DrawerContentScrollView,
 
 import SplashScreen from './splash';
 import HomeScreen from './home';
-import TimetableScreen from './timetable';
+import {TimetableScreen} from './timetable';
 import DiaryScreen from './diary';
 import SubjectOverviewScreen from './subject_overview';
 
@@ -84,7 +84,7 @@ const StackNavigation=({navigation}) => {
           
           drawerLabelStyle: {color: '#fff',},
           drawerType: 'back',
-          overlayColor: 'rgba(12,12,12, 0.99)',
+          overlayColor: 'rgba(12,12,12, 0.70)',
         }}>            
             <Drawer.Screen options={{headerShown: false}} name="Home" component={HomeScreen} />
             <Drawer.Screen name="Timetable" component={TimetableScreen} />

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
       marginLeft: 'auto',
       marginRight: 'auto',
       marginTop: 15,
-      width: '70%',
+      width: '80%',
     },
 
     headingContainer: {
@@ -90,40 +90,101 @@ const styles = StyleSheet.create({
   });
 
   const stylesTimetableScreen = StyleSheet.create({
+    //Adding New Subjects
     btnContainer: {
-      width: '100%',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
+      marginTop: 20,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      width: '90%',
+      borderRadius: 10,
+      flexDirection: 'column',
+
+      backgroundColor: 'white',
+      height: '80%',
+    },
+
+    btnExitModalContainer: {
+      
+    },
+    
+    btnExitModal: {
+      color: 'black',
+      textAlign: 'right',
+      padding: 5,
     },
     
     txtSubject: {
       color: 'black',
       borderColor: 'grey',
-      borderWidth: 2,
-      borderRadius: 10,
+      borderWidth: 1,
       backgroundColor: 'white',
       marginBottom: 10,
-      height: 40,
-      flex: 15,
+      height: 50,
     },  
 
+    periodListContainer: {
+      marginBottom: 10,
+      borderColor: 'grey',
+      borderWidth: 1,
+    },  
+
+    periodList: {
+      height: 50,
+    },
+
+    periodListItems: {
+      backgroundColor: '#fff',
+      height: 50,
+    },
+
+    btnAddSubject: {
+      backgroundColor: 'white',
+      color: 'black',
+      justifyContent: 'center',
+      height: 50,
+      borderColor: 'grey',
+      borderWidth: 1,
+    },
+
+    btnAddSubjectTxt: {
+      color: 'black',
+      textAlign: 'center',
+      fontSize: 18,    
+    },
+
+    //Displaying Subjects
     subjectsContainer: {
+      marginTop: 20,
+      width: '100%',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+    },
+
+    tableTitle: {
+      fontWeight: 'bold',
+      color: 'black',
+      fontSize: 14,
+    },
+
+    subjectInformation: {
       width: '100%',
       flexDirection: 'row',
       justifyContent: 'flex-start'
     },
 
     subjectTitle: {
-      color: "#fff",
-      fontSize: 18,
+      color: "black",
+      fontSize: 14,
     },
 
     removeSubjectContainer: {
       paddingLeft: 8,
     },
 
+    
+
     btnRemoveSubject: {
-      color: '#fff',
+      color: '#ff0000',
       textAlign: 'right',
     },
     });
@@ -172,7 +233,7 @@ const styles = StyleSheet.create({
 
       btn: {
         width: 210,
-        height: 40,
+        height: 50,
         backgroundColor: 'white',
         borderRadius: 5,
         marginBottom: 10,   
