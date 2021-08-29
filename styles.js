@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
 
       backgroundColor: 'white',
-      height: '80%',
+      height: 350,
     },
 
     btnExitModalContainer: {
