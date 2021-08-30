@@ -73,10 +73,14 @@ const TimetableScreen = ({navigation}) => {
     }
   }
 
-  useEffect(() => { // Load data from async storage
+  useEffect(() => { // Load data from async storage and set day to current day
       getData();   
-        setStorageLoaded(true); 
-        console.log(storageLoaded)
+      setStorageLoaded(true); 
+      var today = new Date();
+      today = today.getUTCDay();
+      if (today < 5 && today !== 0){
+        setDay(parseInt(today))
+      }     
   },[])
 
   const [storageLoaded, setStorageLoaded] = React.useState(false);
@@ -224,10 +228,9 @@ const TimetableScreen = ({navigation}) => {
                     <DataTable.Row>
                       <DataTable.Cell>
                         <View style={stylesTimetableScreen.subjectInformation}>
-                          <TouchableOpacity>
-                          <Text style={stylesTimetableScreen.subjectTitle}>{subjectItem.subjectName}</Text>  
-                          </TouchableOpacity>
-                          
+                          <TouchableOpacity onPress={() => {navigation.navigate('SubjectOverview', subjectItem)}}>
+                            <Text style={stylesTimetableScreen.subjectTitle}>{subjectItem.subjectName}</Text>  
+                          </TouchableOpacity>                         
                         </View>
                       </DataTable.Cell>
                       <DataTable.Cell numeric>
