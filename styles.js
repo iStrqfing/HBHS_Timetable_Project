@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     btnAddSubjectTxt: {
       color: 'black',
       textAlign: 'center',
-      fontSize: 18,    
+      fontSize: 18,   
     },
 
     //Displaying Subjects

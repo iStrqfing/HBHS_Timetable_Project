@@ -93,9 +93,59 @@ const TimetableScreen = ({navigation}) => {
   useEffect(() => { // Store subjects array into async storage everytime subjects array is updated
     if (subjects !== null && storageLoaded === true) {     
       storeData();
-    }
+    }  
   },[subjects])
   
+
+  // Setting subjects up that are displayed in the timetable //
+  const [subjectsToDisplay, setSubjectsToDisplay] = useState([]);
+
+  const [day, setDay] = useState(1);
+
+  const schoolDays = [ // Array of school days and their period offsets
+     {dayOfWeek: 'Monday', periodOffset: 0},
+     {dayOfWeek: 'Tuesday', periodOffset: 1},
+     {dayOfWeek: 'Wednesday', periodOffset: 2},
+     {dayOfWeek: 'Thursday', periodOffset: 3},
+     {dayOfWeek: 'Friday', periodOffset: 4},
+  ];
+
+  const displaySubjects = () => { // Updates the displayed subjects with their new information
+    var tempSubjectsToDisplay = [];
+    for (let i = 0; i < subjects.length; i++) {
+      let newPeriod =
+        parseInt(subjects[i].subjectPeriod) + schoolDays[day - 1].periodOffset;
+      if (newPeriod !== 6) { // If period is not equal to 6
+        if (newPeriod > 6) { // If period is greater than 6
+          newPeriod = newPeriod - 6; // -6 from period number to put it back on timetable
+        }
+        tempSubjectsToDisplay = [...tempSubjectsToDisplay, {subjectName: subjects[i].subjectName, subjectPeriod: newPeriod}];
+        tempSubjectsToDisplay.sort((a, b) => (a.subjectPeriod > b.subjectPeriod) ? 1 : -1) // Sort subjects by period
+      }
+    }
+    setSubjectsToDisplay(tempSubjectsToDisplay);
+  }
+
+  useEffect(() => { // Update displayed subjects when the day or subjects array changes
+    displaySubjects();
+  },[day, subjects])
+
+  const nextDay = () => { // Sets the day to the next day
+    if (day < 5) {
+      setDay(day + 1);
+    } else {
+      setDay(1);
+    }   
+  };
+
+   const prevDay = () => { // Sets the day to the previous day
+    if (day > 1) {
+      setDay(day - 1);
+    } else {
+      setDay(5);
+    }   
+   }
+
   return (
     <Provider>     
       <View style={styles.container}>
@@ -154,7 +204,7 @@ const TimetableScreen = ({navigation}) => {
                     </Text>
                   </DataTable.Title>
                 </DataTable.Header>
-                {subjects.map((subjectItem) => { //Map all subjects into their own overview   
+                {subjectsToDisplay.map((subjectItem) => { //Map all subjects into their own overview   
                 const RemoveSubject = () => { // Function to delete subject          
                   Alert.alert(subjectItem.subjectName, "Are you sure you want to remove this subject", [
                     {
@@ -167,6 +217,8 @@ const TimetableScreen = ({navigation}) => {
                     }},
                   ]);
                 };
+
+                
                 // Subject Overview Structure
                   return (
                     <DataTable.Row>
@@ -192,9 +244,24 @@ const TimetableScreen = ({navigation}) => {
               </DataTable>
             </View>
           </View>
+          <View style={{...stylesTimetableScreen.btnAddSubject, borderWidth: 0, borderTopWidth: 1, alignItems: 'center', justifyContent: 'center'}}>    
+              <View style={{flexDirection: 'row'}}>
+                <TouchableOpacity onPress={() => prevDay()}>
+                  <Text style={stylesTimetableScreen.btnAddSubjectTxt}><FontAwesome5 size={ 24 } name={'chevron-left'} brand /></Text>
+                </TouchableOpacity>    
+                <Text style={{...stylesTimetableScreen.btnAddSubjectTxt, width: 100, marginHorizontal: 50}}>
+                  {schoolDays[day - 1].dayOfWeek}
+                </Text>
+                <TouchableOpacity onPress={() => nextDay()}>
+                 <Text style={stylesTimetableScreen.btnAddSubjectTxt}><FontAwesome5 size={ 24 } name={'chevron-right'} solid /></Text>
+                </TouchableOpacity>   
+              </View>              
+          </View>
           <TouchableOpacity style={{...stylesTimetableScreen.btnAddSubject, borderWidth: 0, borderTopWidth: 1}} onPress={() => showModal()}>
             <Text style={stylesTimetableScreen.btnAddSubjectTxt}>Add Subjects</Text>
-          </TouchableOpacity>     
+          </TouchableOpacity>
+          
+            
         </View>
       </View>
     </Provider>
