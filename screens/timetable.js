@@ -77,7 +77,7 @@ const TimetableScreen = ({navigation}) => {
       getData();   
       setStorageLoaded(true); 
       var today = new Date();
-      today = today.getUTCDay();
+      today = today.getDay();
       if (today < 5 && today !== 0){
         setDay(parseInt(today))
       }     
